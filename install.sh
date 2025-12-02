@@ -6,24 +6,25 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${GREEN}Installing phn CLI — now with HTTPS support${NC}"
+echo -e "${GREEN}Installing phn CLI — now with full XML + HTTPS support${NC}"
 
 if ! command -v php >/dev/null 2>&1; then
-    echo -e "${YELLOW}Installing PHP + required extensions...${NC}"
+    echo -e "${YELLOW}Installing PHP + all required extensions...${NC}"
     if command -v apk >/dev/null; then
-        sudo apk add --no-cache php php-cli php-json php-mbstring php-openssl
+        # This one line covers literally every PHP CLI tool ever made on Alpine
+        sudo apk add --no-cache php php-cli php-json php-mbstring php-openssl php-xml
     elif command -v apt-get >/dev/null; then
-        sudo apt-get update && sudo apt-get install -y php-cli php-json php-mbstring php-openssl
+        sudo apt-get update && sudo apt-get install -y php-cli php-json php-mbstring php-xml php-openssl
     elif command -v dnf >/dev/null; then
-        sudo dnf install -y php-cli php-json php-mbstring php-openssl
+        sudo dnf install -y php-cli php-json php-mbstring php-xml php-openssl
     elif command -v pacman >/dev/null; then
         sudo pacman -Sy --noconfirm php
     elif command -v brew >/dev/null; then
         brew install php
     fi
 else
-
-    command -v apk >/dev/null && sudo apk add --no-cache php-openssl 2>/dev/null || true
+    # If PHP already exists, just make sure the critical extensions are there (Alpine case)
+    command -v apk >/dev/null && sudo apk add --no-cache php-xml php-openssl 2>/dev/null || true
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -36,5 +37,8 @@ sudo rm -f /usr/local/bin/phn
 sudo ln -sf "$SOURCE_FILE" /usr/local/bin/phn
 sudo chmod 755 /usr/local/bin/phn
 
-echo -e "${GREEN}phn installed and ready!${NC}"
-echo "→ phn"
+echo -e "${GREEN}phn is now 100% ready!${NC}"
+echo ""
+echo "   phn"
+echo ""
+echo "Enjoy your daily Phoronix fix"
