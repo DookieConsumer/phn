@@ -24,3 +24,5 @@ sudo chmod 755 /usr/local/bin/phn
 echo -e "${GREEN}Success! You can now run 'phn' from anywhere.${NC}"
 echo ""
 echo "Uninstall anytime with: sudo rm /usr/local/bin/phn"
+echo ""
+echo "If phn does not work you must install php"
