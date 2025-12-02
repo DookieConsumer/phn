@@ -3,6 +3,6 @@ phn is a PHP CLI program that displays the latest in Linux from phoronix
 
 
 
-# To install chmod the install.sh then run the install.sh script in the phn directory
+# To install phn chmod the install.sh then run the install.sh script in the phn directory
 
 ## Make sure to install php for phn to work
