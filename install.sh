@@ -9,13 +9,13 @@ NC='\033[0m'
 echo -e "${GREEN}Installing phn — Phoronix News CLI${NC}"
 echo -e "${YELLOW}Supports Alpine • Ubuntu • Arch • Gentoo • Fedora • openSUSE • Void • macOS • Docker • everything${NC}"
 
-# ——— Install PHP + ALL extensions your script actually needs ———
+
 if ! command -v php >/dev/null 2>&1; then
     echo -e "${YELLOW}Installing PHP + required extensions...${NC}"
 
-    if command -v apk >/dev/null 2>&1; then                  # Alpine Linux (the tricky one)
+    if command -v apk >/dev/null 2>&1; then                  # Alpine Linux
         sudo apk add --no-cache php83 php83-cli php83-json php83-mbstring php83-openssl php83-xml php83-simplexml
-        # Force SimpleXML to load — this is the line that finally fixes Alpine forever
+        
         sudo mkdir -p /etc/php83/conf.d
         echo "extension=simplexml.so" | sudo tee /etc/php83/conf.d/00_simplexml.ini > /dev/null
 
@@ -47,14 +47,14 @@ if ! command -v php >/dev/null 2>&1; then
     fi
 else
     echo "PHP already detected"
-    # Extra safety net for Alpine if user already had PHP
+    
     if command -v apk >/dev/null 2>&1; then
         sudo apk add --no-cache php83-simplexml 2>/dev/null || true
         echo "extension=simplexml.so" | sudo tee /etc/php83/conf.d/00_simplexml.ini > /dev/null 2>&1 || true
     fi
 fi
 
-# ——— Make phn command global ———
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_FILE="$SCRIPT_DIR/phn.php"
 
@@ -70,7 +70,7 @@ echo -e "${GREEN}║     phn installed perfectly! ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════╝${NC}"
 echo
 echo "   Just type:  phn"
-echo
+echo:
 echo "   Uninstall: sudo rm /usr/local/bin/phn"
 echo
 echo -e "${GREEN}Enjoy your daily Phoronix fix! 🔥${NC}"
