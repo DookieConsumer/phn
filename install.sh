@@ -73,4 +73,3 @@ echo "   Just type:  phn"
 echo:
 echo "   Uninstall: sudo rm /usr/local/bin/phn"
 echo
-echo -e "${GREEN}Enjoy your daily Phoronix fix! 🔥${NC}"
