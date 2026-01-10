@@ -26,7 +26,7 @@ if ! command -v php >/dev/null 2>&1; then
     elif command -v dnf >/dev/null 2>&1; then                # Fedora / RHEL / Rocky / Alma
         sudo dnf install -y php-cli php-xml php-mbstring php-json php-openssl
 
-    elif command -v pacman >/dev/null 2>&1; then             # Arch / Manjaro / EndeavourOS
+    elif command -v pacman >/dev/null 2>&1; then             # Arch / Manjaro / EndeavourOS / CachyOS
         sudo pacman -Sy --noconfirm php
 
     elif command -v emerge >/dev/null 2>&1; then             # Gentoo
